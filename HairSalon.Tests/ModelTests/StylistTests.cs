@@ -177,5 +177,23 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreEqual(newList, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsStylistInDatabase_Stylist()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      string specialty = "Colorist";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, specialty, hireDate);
+      newStylist.Save();
+
+      //Act
+      Stylist foundStylist = Stylist.Find(newStylist.GetId());
+
+      //Assert
+      Assert.AreEqual(newStylist, foundStylist);
+    }
+
   }
 }

@@ -120,6 +120,37 @@ namespace HairSalon.Models
       return allStylists;
     }
 
+    public static Stylist Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int StylistId = 0;
+      string StylistName = "";
+      string StylistSpecialty = "";
+      DateTime StylistHireDate = new DateTime(1900, 1, 1);
+      while(rdr.Read())
+      {
+        StylistId = rdr.GetInt32(0);
+        StylistName = rdr.GetString(1);
+        StylistSpecialty = rdr.GetString(2);
+        StylistHireDate = rdr.GetDateTime(3);
+      }
+      Stylist newStylist = new Stylist(StylistName, StylistSpecialty, StylistHireDate, StylistId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newStylist;
+    }
+    
     public override bool Equals(System.Object otherStylist)
     {
       if (!(otherStylist is Stylist))
