@@ -66,5 +66,40 @@ namespace HairSalon.Tests
       //Assert
       Assert.AreEqual(updatedName, result);
     }
+
+    [TestMethod]
+    public void GetGender_ReturnsGender_String()
+    {
+      //Arrange
+      string name = "Tom Jones";
+      string gender = "Male";
+      int stylistId = 1;
+      Client newClient = new Client(name, gender, stylistId);
+
+      //Act
+      string result = newClient.GetGender();
+
+      //Assert
+      Assert.AreEqual(gender, result);
+    }
+
+    [TestMethod]
+    public void SetGender_SetGender_String()
+    {
+      //Arrange
+      string name = "Tom Jones";
+      string gender = "Male";
+      int stylistId = 1;
+      Client newClient = new Client(name, gender, stylistId);
+
+      //Act
+      string updatedGender = "Tom Jones";
+      newClient.SetGender(updatedGender);
+      string result = newClient.GetGender();
+
+      //Assert
+      Assert.AreEqual(updatedGender, result);
+    }
+    
   }
 }
