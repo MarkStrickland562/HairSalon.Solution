@@ -49,17 +49,39 @@ namespace HairSalon.Models
       _stylistId = newStylistId;
     }
 
+    public int GetId()
+    {
+      return _id;
+    }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.CommandText = @"DELETE FROM clients;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
+      }
+    }
+
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherStylist is Client))
+      {
+        return false;
+      }
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool idEquality = this.GetId().Equals(newClient.GetId());
+        bool nameEquality = this.GetName().Equals(newClient.GetName());
+        bool genderEquality = this.GetGender().Equals(newClient.GetGender());
+        bool stylistIdEquality = this.GetStylistId().Equals(newClient.GetStylistId());
+        return (idEquality && nameEquality && genderEquality && stylistIdEquality);
       }
     }
 
