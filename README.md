@@ -23,12 +23,22 @@
 ## Specifications
 |   Behavior                  | Input Example  | Output Example | Explanation                |
 | :--------------------------:| :-------------:| :-------------:| :-------------------------:|
-| An instance of a Stylist object can be created | "Betty" | The type of the Stylist instance is correct | Simple verification that the Stylist constructor works |
-| The value of each of the Stylist object's properties can be obtained successfully | "Colorist" | The Specialty property of an instance of a Stylist has the value of "Colorist" | Simple verification of the Speciality Getter method of the Stylist object |
-| Properties of an instance of a Stylist can be updated | "Barber" | The updated Specialty property of a Stylist instance is "Barber" | Simple verification of the Specialty Setter method of the Stylist object |
+| An instance of a Stylist object can be created | "Betty Clark", "Colorist", "01/01/2019" | The type of the Stylist instance is correct | Verification that the Stylist constructor works |
+| A new stylist can be added and saved in the database | "Betty Clark", "Colorist", "01/01/2019" | In MySQL, "SELECT * FROM stylists WHERE name = 'Betty Clark'" returns a row | Verification of the Save() method of the Stylist class |
+| The value of each of the Stylist object's properties can be obtained successfully | "Colorist" | The Specialty property of an instance of a Stylist has the value of "Colorist" | Verification of the Specialty Getter method of the Stylist object |
+| Properties of an instance of a Stylist can be updated | "Barber" | The updated Specialty property of a Stylist instance is "Barber" | Verification of the Specialty Setter method of the Stylist object |
 | An entered stylist must have a value | Blank, ie, "" | "No stylist was entered" | Verification that a stylist was entered |
-
-
+| An instance of a Client object can be created | "Sharon Smith", "Female" | The type of the Client instance is correct | Verification that the Client constructor works |
+| A new client can be added and saved in the database | "Sharon Smith", "Female" | In MySQL, "SELECT * FROM clients WHERE name = 'Sharon Smith'" returns a row | Verification of the Save() method of the Client class |
+| The value of each of the Client object's properties can be obtained successfully | "Sharon Smith" | The Name property of an instance of a Client has the value of "Sharon Smith" | Verification of the Name Getter method of the Client object |
+| Properties of an instance of a Client can be updated | "Tom Jones" | The updated Name property of a Client instance is "Tom Jones" | Verification of the Name Setter method of the Client object |
+| An entered client must have a value | Blank, ie, "" | "No client was entered" | Verification that a client was entered |
+| A list of stylists can be viewed | N/A | A list of stylists is returned. | Verification that the GetAll() method for the Stylist class works correctly |
+| The details for a stylist can be viewed | 1 | The selected stylist's Name, Specialty and Hire Date are returned. | Verification that the Find() method for the Stylist class works correctly |
+| A list of all clients can be viewed | N/A | A list of all clients is returned. | Verification that the GetAll() method for the Client class works correctly |
+| The details for a client can be viewed | 1 | The selected client's Name and Gender are returned. | Verification that the GetAll() method for the Client class works correctly |
+| A client can be added to a specific stylist |
+| The clients that belong to a stylist can be viewed | N/A | A list of clients who belong to a stylist are returned. | Verification that the GetClients() method of the Stylist class works correctly |
 
 ## Instructions
 Download and install the following required software packages"
@@ -40,11 +50,16 @@ Clone this repository as follows: $ git clone https://github.com/MarkStrickland5
 
 To edit the project, open the project in your preferred text editor.
 
-Change into the work directory: $ cd HairSalon.Solution
+Install the required .NET packages:
+
+    $ cd HairSalon.Solution/HairSalon
+    $ dotnet restore
+    $ cd ../HairSalon.tests
+    $ dotnet restore
 
 To run the program, navigate to the production directory and build and run the application:
 
-    $ cd HairSalon
+    $ cd ../HairSalon   -- this is assuming that you were still in the HairSalon.Tests directory from above.
     $ dotnet build
     $ dotnet run
 
