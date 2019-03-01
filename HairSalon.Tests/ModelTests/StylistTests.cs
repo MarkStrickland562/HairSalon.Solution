@@ -101,5 +101,39 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedSpecialty, result);
     }
 
+    [TestMethod]
+    public void GetHireDate_ReturnsHireDate_DateTime()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      string specialty = "Colorist";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, specialty, hireDate);
+
+      //Act
+      DateTime result = newStylist.GetHireDate();
+
+      //Assert
+      Assert.AreEqual(hireDate, result);
+    }
+
+    [TestMethod]
+    public void SetHireDate_SetHireDate_DateTime()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      string specialty = "Colorist";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, specialty, hireDate);
+
+      //Act
+      DateTime updatedHireDate = new DateTime(2019, 02, 28);
+      newStylist.SetHireDate(updatedHireDate);
+      DateTime result = newStylist.GetHireDate();
+
+      //Assert
+      Assert.AreEqual(updatedHireDate, result);
+    }
+
   }
 }
