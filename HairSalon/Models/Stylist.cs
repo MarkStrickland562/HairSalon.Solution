@@ -150,7 +150,36 @@ namespace HairSalon.Models
       }
       return newStylist;
     }
-    
+
+    public List<Client> GetClients()
+    {
+      List<Client> allStylistClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM Clients WHERE Stylist_id = @Stylist_id;";
+      MySqlParameter StylistId = new MySqlParameter();
+      StylistId.ParameterName = "@Stylist_id";
+      StylistId.Value = this._id;
+      cmd.Parameters.Add(StylistId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
+        string clientGender = rdr.GetString(2);
+        int clientStylistId = rdr.GetInt32(3);
+        Client newClient = new Client(clientName, clientGender, clientStylistId, clientId);
+        allStylistClients.Add(newClient);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allStylistClients;
+    }
+
     public override bool Equals(System.Object otherStylist)
     {
       if (!(otherStylist is Stylist))
