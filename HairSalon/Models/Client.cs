@@ -70,7 +70,7 @@ namespace HairSalon.Models
 
     public override bool Equals(System.Object otherClient)
     {
-      if (!(otherStylist is Client))
+      if (!(otherClient is Client))
       {
         return false;
       }

@@ -153,28 +153,29 @@ namespace HairSalon.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
-    // [TestMethod]
-    // public void GetAll_ReturnsAllStylistObjects_StylistList()
-    // {
-    //   //Arrange
-    //   string name1 = "Betty Clark";
-    //   string specialty1 = "Colorist";
-    //   DateTime hireDate1 = new DateTime(2019, 01, 01);
-    //   Stylist newStylist1 = new Stylist(name1, specialty1, hireDate1);
-    //   newStylist1.Save();
-    //   string name2 = "Sharon Smith";
-    //   string specialty2 = "Barber";
-    //   DateTime hireDate2 = new DateTime(2019, 02, 28);
-    //   Stylist newStylist2 = new Stylist(name2, specialty2, hireDate2);
-    //   newStylist2.Save();
-    //
-    //   List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2};
-    //
-    //   //Act
-    //   List<Stylist> result = Stylist.GetAll();
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
+    [TestMethod]
+    public void GetAll_ReturnsAllStylistObjects_StylistList()
+    {
+      //Arrange
+      string name1 = "Betty Clark";
+      string specialty1 = "Colorist";
+      DateTime hireDate1 = new DateTime(2019, 01, 01);
+      Stylist newStylist1 = new Stylist(name1, specialty1, hireDate1);
+      newStylist1.Save();
+
+      string name2 = "Sharon Smith";
+      string specialty2 = "Barber";
+      DateTime hireDate2 = new DateTime(2019, 02, 28);
+      Stylist newStylist2 = new Stylist(name2, specialty2, hireDate2);
+      newStylist2.Save();
+
+      List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2};
+
+      //Act
+      List<Stylist> result = Stylist.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
   }
 }
