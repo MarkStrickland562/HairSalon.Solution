@@ -67,5 +67,39 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedName, result);
     }
 
+    [TestMethod]
+    public void GetSpecialty_ReturnsSpecialty_String()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      string specialty = "Colorist";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, specialty, hireDate);
+
+      //Act
+      string result = newStylist.GetSpecialty();
+
+      //Assert
+      Assert.AreEqual(specialty, result);
+    }
+
+    [TestMethod]
+    public void SetSpecialty_SetSpecialty_String()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      string specialty = "Colorist";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, specialty, hireDate);
+
+      //Act
+      string updatedSpecialty = "Barber";
+      newStylist.SetSpecialty(updatedSpecialty);
+      string result = newStylist.GetSpecialty();
+
+      //Assert
+      Assert.AreEqual(updatedSpecialty, result);
+    }
+
   }
 }
