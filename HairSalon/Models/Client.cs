@@ -68,6 +68,58 @@ namespace HairSalon.Models
       }
     }
 
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO clients (name, gender, stylist_id) VALUES (@name, @gender, @stylistId);";
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@name";
+      name.Value = this._name;
+      cmd.Parameters.Add(name);
+      MySqlParameter gender = new MySqlParameter();
+      gender.ParameterName = "@gender";
+      gender.Value = this._gender;
+      cmd.Parameters.Add(gender);
+      MySqlParameter stylistId = new MySqlParameter();
+      stylistId.ParameterName = "@stylistId";
+      stylistId.Value = this._stylistId;
+      cmd.Parameters.Add(stylistId);
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public static List<Client> GetAll()
+    {
+      List<Client> allClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
+        string clientGender = rdr.GetString(2);
+        int clientStylistId = rdr.GetInt32(3);
+        Client newClient = new Client(clientName, clientGender, clientStylistId, clientId);
+        allClients.Add(newClient);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allClients;
+    }
+
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
@@ -77,10 +129,10 @@ namespace HairSalon.Models
       else
       {
         Client newClient = (Client) otherClient;
-        bool idEquality = this.GetId().Equals(newClient.GetId());
-        bool nameEquality = this.GetName().Equals(newClient.GetName());
-        bool genderEquality = this.GetGender().Equals(newClient.GetGender());
-        bool stylistIdEquality = this.GetStylistId().Equals(newClient.GetStylistId());
+        bool idEquality = this.GetId() == newClient.GetId();
+        bool nameEquality = this.GetName() == newClient.GetName();
+        bool genderEquality = this.GetGender() == newClient.GetGender();
+        bool stylistIdEquality = this.GetStylistId() == newClient.GetStylistId();
         return (idEquality && nameEquality && genderEquality && stylistIdEquality);
       }
     }

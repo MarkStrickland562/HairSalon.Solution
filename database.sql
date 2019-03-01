@@ -14,11 +14,7 @@ ENGINE=InnoDB;
 CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       name VARCHAR(255) NOT NULL,
                       gender enum ("Male", "Female", "Non-Binary"),
-                      stylist_id INT NOT NULL,
-                      KEY fk_stylist (stylist_id),
-                      CONSTRAINT clients_fk_stylists
-                      FOREIGN KEY (stylist_id)
-                      REFERENCES stylists(id))
+                      stylist_id INT NOT NULL)
 ENGINE=InnoDB;
 
 CREATE DATABASE mark_strickland_test;
@@ -33,10 +29,6 @@ ENGINE=InnoDB;
 
 CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       name VARCHAR(255) NOT NULL,
-                      gender enum ("male", "female", "non-binary"),
-                      stylist_id INT NOT NULL,
-                      KEY fk_stylist (stylist_id),
-                      CONSTRAINT clients_fk_stylists
-                      FOREIGN KEY (stylist_id)
-                      REFERENCES stylists(id))
+                      gender enum ("Male", "Female", "non-binary"),
+                      stylist_id INT NOT NULL)
 ENGINE=InnoDB;

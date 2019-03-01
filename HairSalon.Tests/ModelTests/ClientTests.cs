@@ -16,8 +16,7 @@ namespace HairSalon.Tests
 
     public void Dispose()
     {
-    //   Stylist.ClearAll();
-    //   Client.ClearAll();
+      Client.ClearAll();
     }
 
     [TestMethod]
@@ -133,6 +132,31 @@ namespace HairSalon.Tests
 
       //Assert
       Assert.AreEqual(updatedStylistId, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsClients_ClientList()
+    {
+      //Arrange
+      string name1 = "Tom Jones";
+      string gender1 = "Male";
+      int stylistId1 = 1;
+      Client newClient1 = new Client(name1, gender1, stylistId1);
+      newClient1.Save();
+
+      string name2 = "Jane Doe";
+      string gender2 = "Female";
+      int stylistId2 = 1;
+      Client newClient2 = new Client(name2, gender2, stylistId2);
+      newClient2.Save();
+
+      List<Client> newList = new List<Client> { newClient1, newClient2 };
+
+      //Act
+      List<Client> result = Client.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
     }
 
   }
