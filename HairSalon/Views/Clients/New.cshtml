@@ -9,9 +9,16 @@
   <input id="clientName" name="clientName" type="text">
   <label for="clientGender">Client Gender:</label>
   <input id="clientGender" name="clientGender" type="text">
+  <label for="clientStylistId">Select a Stylist</label>
+  <select id="clientStylistId" name="clientStylistId" type="text">
 
-  <button type="submit">Add a New Client</button>
+  @foreach (var stylist in Model)
+  {
+    <option value='@stylist.GetId()'>@stylist.GetName()</option>
+  }
+  </select</>
+  <button type='submit'>Add a New Client</button>
 </form>
 
-<p><a href="/">Return to the Foyer</a></p>
+<p><a href="/">Return to the Salon Foyer</a></p>
 <p><a href="/clients">View All Clients</a></p>

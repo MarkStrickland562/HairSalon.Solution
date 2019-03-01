@@ -41,13 +41,5 @@ namespace HairSalon.Controllers
       return View(model);
      }
 
-     [HttpPost("/stylists/{stylistId}/Clients/new")]
-     public ActionResult AddClient(int stylistId, int clientId)
-     {
-       stylist stylist = stylist.Find(stylistId);
-       Client client = client.Find(clientId);
-       stylist.AddClient(client);
-       return RedirectToAction("Show",  new { id = stylistId });
-     }
   }
 }

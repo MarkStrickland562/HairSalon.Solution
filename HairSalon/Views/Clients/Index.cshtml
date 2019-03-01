@@ -10,10 +10,10 @@
   <ul>
     @foreach (var client in Model)
     {
-      <li><a href='/clients/@item.GetId()'>@item.GetName()</a></li>
+      <li><a href='/clients/@client.GetId()'>@client.GetName()</a></li>
     }
   </ul>
 }
 
 <h4><a href="/clients/new">Add a New Client</a></h4>
-<h4><a href="/">Main Page</a></h4>
+<h4><a href="/">Return to the Salon Foyer</a></h4>

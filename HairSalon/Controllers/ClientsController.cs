@@ -10,22 +10,23 @@ namespace HairSalon.Controllers
     public ActionResult Index()
     {
       List<Client> allClients = Client.GetAll();
-      return View(allclients);
+      return View(allClients);
     }
 
     [HttpGet("/clients/new")]
     public ActionResult New()
     {
-      return View();
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View(allStylists);
     }
 
     [HttpPost("/clients")]
-    public ActionResult Create(string clientName, clientGender)
+    public ActionResult Create(string clientName, string clientGender, int clientStylistId)
     {
-      Client newClient = new Client(clientName, clientGender);
+      Client newClient = new Client(clientName, clientGender, clientStylistId);
       newClient.Save();
-      List<Client> allclients = Client.GetAll();
-      return View("Index", allclients);
+      List<Client> allClients = Client.GetAll();
+      return View("Index", allClients);
     }
 
   }
