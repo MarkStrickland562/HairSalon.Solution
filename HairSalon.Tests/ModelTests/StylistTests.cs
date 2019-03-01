@@ -6,10 +6,10 @@ using System;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class HairSalonTest : IDisposable
+  public class StylistTest : IDisposable
   {
 
-    public HairSalonTest()
+    public StylistTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mark_strickland_test;";
     }
