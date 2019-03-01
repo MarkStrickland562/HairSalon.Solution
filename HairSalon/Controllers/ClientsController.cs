@@ -13,6 +13,11 @@ namespace HairSalon.Controllers
       return View(allclients);
     }
 
+    [HttpGet("/clients/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
 
   }
 }

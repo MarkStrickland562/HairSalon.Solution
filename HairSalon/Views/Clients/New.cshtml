@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Add a New Client</h1>
+
+<form action="/clients" method="post">
+  <label for="clientName">Client Name:</label>
+  <input id="clientName" name="clientName" type="text">
+  <label for="clientGender">Client Gender:</label>
+  <input id="clientGender" name="clientGender" type="text">
+
+  <button type="submit">Add a New Client</button>
+</form>
+
+<p><a href="/">Return to the Foyer</a></p>
+<p><a href="/clients">View All Clients</a></p>
