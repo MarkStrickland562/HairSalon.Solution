@@ -8,16 +8,19 @@
   <label for="clientName">Client Name:</label>
   <input id="clientName" name="clientName" type="text">
   <label for="clientGender">Client Gender:</label>
-  <input id="clientGender" name="clientGender" type="text">
+  <select id = "clientGender" name="clientGender" type="text">
+    <option value='Male'>Male</option>
+    <option value='Female'>Female</option>
+    <option value='Non-Binary'>Non-Binary</option>
+  </select>
   <label for="clientStylistId">Select a Stylist</label>
   <select id="clientStylistId" name="clientStylistId" type="text">
-
   @foreach (var stylist in Model)
   {
     <option value='@stylist.GetId()'>@stylist.GetName()</option>
   }
-  </select</>
-  <button type='submit'>Add a New Client</button>
+  </select>
+  <button type='submit'>Add</button>
 </form>
 
 <p><a href="/">Return to the Salon Foyer</a></p>
