@@ -45,6 +45,7 @@ Download and install the following required software packages"
 1. .NET Core 1.1.4 SDK
 2. .NET Core Runtime 1.1.2
 3. Mono
+4. MAMP 4.1.0
 
 Create the databases and tables by connecting to MySQL and executing the SQL statements below:
 
@@ -103,7 +104,7 @@ To run the tests for this project, change back into the solution directory, Hair
 * _.NET Core Runtime 1.1.2
 * _Mono_
 * _C#_
-* _MSTesst_
+* _MSTest_
 * _MySQL_
 * _ATOM_
 * _Git_
