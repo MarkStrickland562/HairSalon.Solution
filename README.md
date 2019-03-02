@@ -29,7 +29,7 @@
 | Properties of an instance of a Stylist can be updated | "Barber" | The updated Specialty property of a Stylist instance is "Barber" | Verification of the Specialty Setter method of the Stylist object |
 | An entered stylist must have a value | Blank, ie, "" | "No stylist was entered" | Verification that a stylist was entered |
 | An instance of a Client object can be created | "Sharon Smith", "Female" | The type of the Client instance is correct | Verification that the Client constructor works |
-| A new client can be added and saved in the database | "Sharon Smith", "Female" | In MySQL, "SELECT * FROM clients WHERE name = 'Sharon Smith'" returns a row | Verification of the Save() method of the Client class |
+| A new client can be added and saved in the database (if there are stylists) | "Sharon Smith", "Female" | In MySQL, "SELECT * FROM clients WHERE name = 'Sharon Smith'" returns a row | Verification of the Save() method of the Client class |
 | The value of each of the Client object's properties can be obtained successfully | "Sharon Smith" | The Name property of an instance of a Client has the value of "Sharon Smith" | Verification of the Name Getter method of the Client object |
 | Properties of an instance of a Client can be updated | "Tom Jones" | The updated Name property of a Client instance is "Tom Jones" | Verification of the Name Setter method of the Client object |
 | An entered client must have a value | Blank, ie, "" | "No client was entered" | Verification that a client was entered |
@@ -45,6 +45,34 @@ Download and install the following required software packages"
 1. .NET Core 1.1.4 SDK
 2. .NET Core Runtime 1.1.2
 3. Mono
+
+Create the databases and tables by connecting to MySQL and executing the SQL statements below:
+
+    $ mysql -proot -uroot -P8889
+
+    > CREATE DATABASE mark_strickland;
+    > USE mark_strickland;
+    > CREATE TABLE stylists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                             name VARCHAR(255) NOT NULL,
+                             specialty VARCHAR(255) NOT NULL,
+                             hire_date DATETIME NOT NULL) ENGINE=InnoDB;
+
+    > CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(255) NOT NULL,
+                            gender enum ("Male", "Female", "Non-Binary"),
+                            stylist_id INT NOT NULL) ENGINE=InnoDB;
+
+    > CREATE DATABASE mark_strickland_test;
+    > USE mark_strickland_test;
+    > CREATE TABLE stylists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                             name VARCHAR(255) NOT NULL,
+                             specialty VARCHAR(255) NOT NULL,
+                             hire_date DATETIME NOT NULL) ENGINE=InnoDB;
+
+    > CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(255) NOT NULL,
+                            gender enum ("Male", "Female", "non-binary"),
+                            stylist_id INT NOT NULL) ENGINE=InnoDB;
 
 Clone this repository as follows: $ git clone https://github.com/MarkStrickland562/HairSalon.Solution
 
