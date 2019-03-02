@@ -2,15 +2,24 @@
   Layout = "_Layout";
 }
 
-<h3>This Stylist has the following clients:</h3>
+<h3>@Model["stylist"].GetName() is a talented @Model["stylist"].GetSpecialty() and was hired on @Model["stylist"].GetHireDate()</h3>
 
-<ol>
-@foreach (var client in @Model["clients"])
+@if (@Model["clients"].Count == 0)
 {
-  <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+  <h3>This stylist does not yet have any clients.</h3>
 }
-</ol>
+else
+{
+  <h3>This Stylist has the Following Clients:</h3>
 
-<p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+  <ol>
+  @foreach (var client in @Model["clients"])
+  {
+    <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+  }
+  </ol>
+}
+
+<p><a href='/clients/new'>Add a New Client</a></p>
 <p><a href='/stylists'>Return to Our Stylists</a></p>
 <p><a href='/'>Return to the Salon Foyer</a></p>

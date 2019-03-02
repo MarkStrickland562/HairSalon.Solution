@@ -2,18 +2,20 @@
   Layout = "_Layout";
 }
 
-<h1>Curl Up and Dye Hair Salon</h1>
-<h2>Clients:</h2>
+<div class="container-content label">
+  <h1>Curl Up and Dye Hair Salon</h1>
+  <h2>Clients</h2>
 
-@if (Model.Count != 0)
-{
-  <ul>
-    @foreach (var client in Model)
-    {
-      <li><a href='/clients/@client.GetId()'>@client.GetName()</a></li>
-    }
-  </ul>
-}
+  @if (Model.Count != 0)
+  {
+    <ul>
+      @foreach (var client in Model)
+      {
+        <li><a href='/clients/@client.GetId()'>@client.GetName(), @client.GetGender()</a></li>
+        }
+        </ul>
+        }
 
-<h4><a href="/clients/new">Add a New Client</a></h4>
-<h4><a href="/">Return to the Salon Foyer</a></h4>
+  <h4><a href="/clients/new">Add a New Client</a></h4>
+  <h4><a href="/">Return to the Salon Foyer</a></h4>
+</div>

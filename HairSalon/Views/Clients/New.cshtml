@@ -2,26 +2,35 @@
   Layout = "_Layout";
 }
 
-<h1>Add a New Client</h1>
+<div class="container-content label">
+  <h1>Add a New Client</h1>
 
-<form action="/clients" method="post">
-  <label for="clientName">Client Name:</label>
-  <input id="clientName" name="clientName" type="text">
-  <label for="clientGender">Client Gender:</label>
-  <select id = "clientGender" name="clientGender" type="text">
-    <option value='Male'>Male</option>
-    <option value='Female'>Female</option>
-    <option value='Non-Binary'>Non-Binary</option>
-  </select>
-  <label for="clientStylistId">Select a Stylist</label>
-  <select id="clientStylistId" name="clientStylistId" type="text">
-  @foreach (var stylist in Model)
+  @if (@Model.Count > 0)
   {
-    <option value='@stylist.GetId()'>@stylist.GetName()</option>
+    <form action="/clients" method="post">
+      <label class="label" for="clientName">Client Name:</label>
+      <input id="clientName" name="clientName" type="text">
+      <label class="label" for="clientGender">Client Gender:</label>
+      <select id = "clientGender" name="clientGender" type="text">
+        <option value='Male'>Male</option>
+        <option value='Female'>Female</option>
+        <option value='Non-Binary'>Non-Binary</option>
+      </select>
+      <label class="label" for="clientStylistId">Select a Stylist</label>
+      <select id="clientStylistId" name="clientStylistId" type="text">
+        @foreach (var stylist in Model)
+        {
+          <option value='@stylist.GetId()'>@stylist.GetName()</option>
+          }
+      </select>
+      <button type='submit' class="btn-submit">Add</button>
+    </form>
   }
-  </select>
-  <button type='submit'>Add</button>
-</form>
+  else
+  {
+    <h3>There are no stylists currently employed at Curl Up and Dye</h3>
+  }
 
-<p><a href="/">Return to the Salon Foyer</a></p>
-<p><a href="/clients">View All Clients</a></p>
+  <p><a class="link" href="/">Return to the Salon Foyer</a></p>
+  <p><a class="link" href="/clients">View All Clients</a></p>
+</div>
