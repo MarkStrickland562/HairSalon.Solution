@@ -25,9 +25,17 @@ namespace HairSalon.Controllers
     public ActionResult Create(string stylistName, string stylistSpecialty, DateTime stylistHireDate)
     {
       Stylist newStylist = new Stylist(stylistName, stylistSpecialty, stylistHireDate);
-      newStylist.Save();
-      List<Stylist> allStylists = Stylist.GetAll();
-      return View("Index", allStylists);
+
+      if (!(string.IsNullOrEmpty(newStylist.GetName())) && !(string.IsNullOrEmpty(newStylist.GetSpecialty())) && !(newStylist.GetHireDate() == DateTime.MinValue))
+      {
+        newStylist.Save();
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View("Index", allStylists);
+      }
+      else
+      {
+        return View("New");
+      }
     }
 
     [HttpGet("/stylists/{id}")]

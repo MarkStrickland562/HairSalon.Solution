@@ -2,24 +2,32 @@
   Layout = "_Layout";
 }
 
-<h3>@Model["stylist"].GetName() is a talented @Model["stylist"].GetSpecialty() and was hired on @Model["stylist"].GetHireDate()</h3>
+<div class="container-content label">
+  <h3>@Model["stylist"].GetName() is a talented @Model["stylist"].GetSpecialty() and was hired on @Model["stylist"].GetHireDate().ToShortDateString()</h3>
 
-@if (@Model["clients"].Count == 0)
-{
-  <h3>This stylist does not yet have any clients.</h3>
-}
-else
-{
-  <h3>This Stylist has the Following Clients:</h3>
-
-  <ol>
-  @foreach (var client in @Model["clients"])
+  @if (@Model["clients"].Count == 0)
   {
-    <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+    <h3>This stylist does not yet have any clients.</h3>
   }
-  </ol>
-}
-
-<p><a href='/clients/new'>Add a New Client</a></p>
-<p><a href='/stylists'>Return to Our Stylists</a></p>
-<p><a href='/'>Return to the Salon Foyer</a></p>
+  else
+  {
+    <h3>This Stylist has the Following Clients:</h3>
+    <table>
+      <tr class="table-header">
+        <th>Client Name</th>
+        <th>Gender</th>
+      </tr>
+      @foreach (var client in @Model["clients"])
+      {
+        <tr class="table-row">
+          <td><a class="link" href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></td>
+          <td>@client.GetGender()</td>
+        </tr>
+      }
+    </table>
+  }
+  <br>
+  <p><a class="link" href='/clients/new'>Add a New Client</a></p>
+  <p><a class="link" href='/stylists'>Return to Our Stylists</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>

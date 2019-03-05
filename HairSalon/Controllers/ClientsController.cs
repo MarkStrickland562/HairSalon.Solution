@@ -24,10 +24,18 @@ namespace HairSalon.Controllers
     public ActionResult Create(string clientName, string clientGender, int clientStylistId)
     {
       Client newClient = new Client(clientName, clientGender, clientStylistId);
-      newClient.Save();
-      List<Client> allClients = Client.GetAll();
-      return View("Index", allClients);
-    }
 
+      if (!(string.IsNullOrEmpty(newClient.GetName())) && !(string.IsNullOrEmpty(newClient.GetGender())) && !(string.IsNullOrEmpty(newClient.GetStylistId().ToString())))
+      {
+        newClient.Save();
+        List<Client> allClients = Client.GetAll();
+        return View("Index", allClients);
+      }
+      else
+      {
+        List<Client> allClients = Client.GetAll();
+        return View("New", allClients);
+      }
+    }
   }
 }

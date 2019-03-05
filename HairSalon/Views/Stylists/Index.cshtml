@@ -3,19 +3,27 @@
 }
 
 <div class="container-content label">
-  <h1>Curl Up and Dye Hair Salon</h1>
-  <h2>Stylists:</h2>
+  <h1 class="h1-font">Curl Up and Dye Hair Salon</h1>
+  <h2>Our Stylists</h2>
 
   @if (Model.Count != 0)
   {
-    <ul>
+    <table>
+      <tr class="table-header">
+        <th>Stylist Name</th>
+        <th>Specialty</th>
+        <th>Hire Date</th>
+      </tr>
       @foreach (var stylist in Model)
       {
-        <li><a href="/Stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+        <tr class="table-row">
+          <td><a class="link" href="/Stylists/@stylist.GetId()">@stylist.GetName()</a></td>
+          <td>@stylist.GetSpecialty()</td>
+          <td>@stylist.GetHireDate().ToShortDateString()</td>
+        </tr>
       }
-    </ul>
+    </table>
   }
-
   <h4><a class="link" href="/Stylists/new">Add a New Stylist</a></h4>
   <h4><a class="link" href="/">Return to the Salon Foyer</a></h4>
 </div>

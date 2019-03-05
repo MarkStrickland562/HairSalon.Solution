@@ -27,6 +27,8 @@ namespace HairSalon
     {
       app.UseDeveloperExceptionPage();
 
+      app.UseStaticFiles();
+
       app.UseMvc(routes =>
       {
         routes.MapRoute(
@@ -34,11 +36,10 @@ namespace HairSalon
           template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-        app.Run(async (context) =>
-        {
-          await context.Response.WriteAsync("Something went wrong!");
-        });
-
+      app.Run(async (context) =>
+      {
+        await context.Response.WriteAsync("Something went wrong!");
+      });
     }
   }
 
@@ -46,5 +47,4 @@ namespace HairSalon
   {
     public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mark_strickland;";
   }
-
 }
