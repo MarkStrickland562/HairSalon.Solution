@@ -3,7 +3,7 @@
 }
 
 <div class="container-content label">
-  <h3>@Model["specialty"].GetSpecialty()</h3>
+  <h1>@Model["specialty"].GetSpecialty()</h1>
 
   @if (@Model["stylists"].Count == 0)
   {
@@ -24,8 +24,18 @@
       }
     </table>
   }
+  <h3>Add this Specialty to a Stylist</h3>
+  <form action='/specialties/@Model["specialty"].GetId()/stylists/new' method='post'>
+    <label for='stylelistId' >Select a Stylist</label>
+    <select id='stylelistId' name='stylelistId' type='text'>
+    @foreach (var stylist in @Model["allStylists"])
+    {
+      <option value='@stylist.GetId()'>@stylist.GetName()</option>
+    }
+    </select>
+    <button type='submit'>Add Stylist</button>
+  </form>
   <br>
-  <p><a class="link" href='/stylists/new'>Add a New Stylist</a></p>
-  <p><a class="link" href='/specialtys'>Return to Our Specialties</a></p>
+  <p><a class="link" href='/specialties'>Return to Our Specialties</a></p>
   <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
 </div>

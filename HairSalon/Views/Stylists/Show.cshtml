@@ -5,6 +5,36 @@
 <div class="container-content label">
   <h3>@Model["stylist"].GetName() was hired on @Model["stylist"].GetHireDate().ToShortDateString()</h3>
 
+  @if (@Model["specialties"].Count == 0)
+  {
+    <h3>This stylist does not yet have any specialties, but is an excellent generalist!</h3>
+  }
+  else
+  {
+    <h3>This Stylist has these Specialty(s):</h3>
+    <table>
+      <tr class="table-header">
+        <th>Specialty</th>
+      </tr>
+      @foreach (var specialty in @Model["specialties"])
+      {
+        <tr class="table-row">
+          <td><a class="link" href="/stylists/@Model["stylist"].GetId()/specialties/@specialty.GetId()">@specialty.GetSpecialty()</a></td>
+        </tr>
+      }
+    </table>
+  }
+  <h3>Add a Specialty for this Stylist</h3>
+  <form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
+    <label for='specialtyId' >Select a Specialty</label>
+    <select id='specialtyId' name='specialtyId' type='text'>
+    @foreach (var specialty in @Model["allSpecialties"])
+    {
+      <option value='@specialty.GetId()'>@specialty.GetSpecialty()</option>
+    }
+    </select>
+    <button type='submit'>Add Specialty</button>
+  </form>
   @if (@Model["clients"].Count == 0)
   {
     <h3>This stylist does not yet have any clients.</h3>
@@ -27,7 +57,6 @@
     </table>
   }
   <br>
-  <p><a class="link" href='/clients/new'>Add a New Client</a></p>
   <p><a class="link" href='/stylists'>Return to Our Stylists</a></p>
   <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
 </div>
