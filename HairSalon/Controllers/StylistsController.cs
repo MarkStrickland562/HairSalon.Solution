@@ -77,5 +77,20 @@ namespace HairSalon.Controllers
        List<Stylist> allStylists = Stylist.GetAll();
        return RedirectToAction("Index", allStylists);
      }
+
+     [HttpGet("/stylists/{id}/edit")]
+     public ActionResult Edit(int id)
+     {
+       Stylist newStylist = Stylist.Find(id);
+       return View(newStylist);
+     }
+
+     [HttpPost("/stylists/{id}/edit")]
+     public ActionResult EditPost(int id, string name, DateTime hireDate)
+     {
+       Stylist newStylist = Stylist.Find(id);
+       newStylist.Edit(name, hireDate);
+       return RedirectToAction("Index");
+     }
   }
 }

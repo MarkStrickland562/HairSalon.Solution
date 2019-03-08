@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container-content label">
+  <h1>Update Stylist</h1>
+  <hr>
+  <form action="/stylists/@Model.GetId()/edit" method="post">
+    <label for="name">Stylist Name:</label>
+    <input type="text" id="name" name="name" placeholder="@Model.GetName()">
+    <label for="hiredate">Hire Date:</label>
+    <input type="text" id="hiredate" name="hiredate" placeholder="@Model.GetHireDate()">
+    <button type="submit">Update</button>
+  </form>
+  <br>
+  <p><a class="link" href='/stylists'>Return to Our Stylists</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>
