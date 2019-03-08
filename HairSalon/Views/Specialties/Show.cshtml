@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container-content label">
+  <h3>@Model["specialty"].GetSpecialty()</h3>
+
+  @if (@Model["stylists"].Count == 0)
+  {
+    <h3>None of our Stylists are currently a/an @Model["specialty"].GetSpecialty().</h3>
+  }
+  else
+  {
+    <h3>These Stylists are a/an @Model["specialty"].GetSpecialty():</h3>
+    <table>
+      <tr class="table-header">
+        <th>Stylist Name</th>
+      </tr>
+      @foreach (var stylist in @Model["stylists"])
+      {
+        <tr class="table-row">
+          <td><a class="link" href="/specialtys/@Model["specialty"].GetId()/stylists/@stylist.GetId()">@stylist.GetName()</a></td>
+        </tr>
+      }
+    </table>
+  }
+  <br>
+  <p><a class="link" href='/stylists/new'>Add a New Stylist</a></p>
+  <p><a class="link" href='/specialtys'>Return to Our Specialties</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>
