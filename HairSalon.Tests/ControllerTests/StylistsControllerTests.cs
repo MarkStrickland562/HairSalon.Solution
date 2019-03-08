@@ -57,7 +57,7 @@ namespace HairSalon.Tests
 
        //Act
        DateTime hireDate = new DateTime(2019, 1, 1);
-       IActionResult view = controller.Create("Jane Doe", "Colorist", hireDate);
+       IActionResult view = controller.Create("Jane Doe", hireDate);
 
        //Assert
        Assert.IsInstanceOfType(view, typeof(ViewResult));

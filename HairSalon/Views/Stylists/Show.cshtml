@@ -3,7 +3,7 @@
 }
 
 <div class="container-content label">
-  <h3>@Model["stylist"].GetName() is a talented @Model["stylist"].GetSpecialty() and was hired on @Model["stylist"].GetHireDate().ToShortDateString()</h3>
+  <h3>@Model["stylist"].GetName() was hired on @Model["stylist"].GetHireDate().ToShortDateString()</h3>
 
   @if (@Model["clients"].Count == 0)
   {

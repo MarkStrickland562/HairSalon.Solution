@@ -43,12 +43,10 @@ CREATE TABLE `stylists` (
 --
 
 CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `gender` enum('Male','Female','Non-Binary') DEFAULT NULL,
-  `stylists_id` int(11) NOT NULL,
-  INDEX stylists_id_ind (stylists_id),
-  FOREIGN KEY (stylists_id) REFERENCES stylists(id) ON DELETE CASCADE
+  `stylists_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -67,9 +65,5 @@ CREATE TABLE `specialties` (
 CREATE TABLE `stylists_specialties` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `stylists_id` int(11) NOT NULL,
-  `specialities_id` int(11) NOT NULL,
-  INDEX stylists_id_ind2 (stylists_id),
-  FOREIGN KEY (stylists_id) REFERENCES stylists(id) ON DELETE CASCADE,
-  INDEX specialties_id_ind (specialities_id),
-  FOREIGN KEY (specialities_id) REFERENCES specialties(id) ON DELETE CASCADE
+  `specialities_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

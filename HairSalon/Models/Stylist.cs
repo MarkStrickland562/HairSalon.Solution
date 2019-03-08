@@ -7,14 +7,12 @@ namespace HairSalon.Models
   public class Stylist
   {
     private string _name;
-    private string _specialty;
     private DateTime _hireDate;
     private int _id;
 
-    public Stylist(string stylistName, string stylistSpecialty, DateTime stylistHireDate,  int id = 0)
+    public Stylist(string stylistName, DateTime stylistHireDate,  int id = 0)
     {
       _name = stylistName;
-      _specialty = stylistSpecialty;
       _hireDate = stylistHireDate;
       _id = id;
     }
@@ -27,16 +25,6 @@ namespace HairSalon.Models
     public void SetName(string newName)
     {
       _name = newName;
-    }
-
-    public string GetSpecialty()
-    {
-      return _specialty;
-    }
-
-    public void SetSpecialty(string newSpecialty)
-    {
-      _specialty = newSpecialty;
     }
 
     public DateTime GetHireDate()
@@ -73,15 +61,11 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (name, specialty, hire_date) VALUES (@name, @specialty, @hireDate);";
+      cmd.CommandText = @"INSERT INTO stylists (name, hire_date) VALUES (@name, @hireDate);";
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@name";
       name.Value = this._name;
       cmd.Parameters.Add(name);
-      MySqlParameter specialty = new MySqlParameter();
-      specialty.ParameterName = "@specialty";
-      specialty.Value = this._specialty;
-      cmd.Parameters.Add(specialty);
       MySqlParameter hireDate = new MySqlParameter();
       hireDate.ParameterName = "@hireDate";
       hireDate.Value = this._hireDate;
@@ -107,9 +91,8 @@ namespace HairSalon.Models
       {
         int StylistId = rdr.GetInt32(0);
         string StylistName = rdr.GetString(1);
-        string StylistSpecialty = rdr.GetString(2);
-        DateTime StylistHireDate = rdr.GetDateTime(3);
-        Stylist newStylist = new Stylist(StylistName, StylistSpecialty, StylistHireDate, StylistId);
+        DateTime StylistHireDate = rdr.GetDateTime(2);
+        Stylist newStylist = new Stylist(StylistName, StylistHireDate, StylistId);
         allStylists.Add(newStylist);
       }
       conn.Close();
@@ -133,16 +116,14 @@ namespace HairSalon.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int StylistId = 0;
       string StylistName = "";
-      string StylistSpecialty = "";
       DateTime StylistHireDate = new DateTime(1900, 1, 1);
       while(rdr.Read())
       {
         StylistId = rdr.GetInt32(0);
         StylistName = rdr.GetString(1);
-        StylistSpecialty = rdr.GetString(2);
-        StylistHireDate = rdr.GetDateTime(3);
+        StylistHireDate = rdr.GetDateTime(2);
       }
-      Stylist newStylist = new Stylist(StylistName, StylistSpecialty, StylistHireDate, StylistId);
+      Stylist newStylist = new Stylist(StylistName, StylistHireDate, StylistId);
       conn.Close();
       if (conn != null)
       {
@@ -157,7 +138,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM Clients WHERE Stylist_id = @Stylist_id;";
+      cmd.CommandText = @"SELECT * FROM Clients WHERE stylists_id = @Stylist_id;";
       MySqlParameter StylistId = new MySqlParameter();
       StylistId.ParameterName = "@Stylist_id";
       StylistId.Value = this._id;
@@ -191,9 +172,8 @@ namespace HairSalon.Models
         Stylist newStylist = (Stylist) otherStylist;
         bool idEquality = this.GetId().Equals(newStylist.GetId());
         bool nameEquality = this.GetName().Equals(newStylist.GetName());
-        bool specialtyEquality = this.GetSpecialty().Equals(newStylist.GetSpecialty());
         bool hireDateEquality = this.GetHireDate().Equals(newStylist.GetHireDate());
-        return (idEquality && nameEquality && specialtyEquality && hireDateEquality);
+        return (idEquality && nameEquality && hireDateEquality);
       }
     }
   }

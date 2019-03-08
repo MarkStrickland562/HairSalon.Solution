@@ -22,11 +22,11 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/stylists")]
-    public ActionResult Create(string stylistName, string stylistSpecialty, DateTime stylistHireDate)
+    public ActionResult Create(string stylistName, DateTime stylistHireDate)
     {
-      Stylist newStylist = new Stylist(stylistName, stylistSpecialty, stylistHireDate);
+      Stylist newStylist = new Stylist(stylistName, stylistHireDate);
 
-      if (!(string.IsNullOrEmpty(newStylist.GetName())) && !(string.IsNullOrEmpty(newStylist.GetSpecialty())) && !(newStylist.GetHireDate() == DateTime.MinValue))
+      if (!(string.IsNullOrEmpty(newStylist.GetName())) && !(newStylist.GetHireDate() == DateTime.MinValue))
       {
         newStylist.Save();
         List<Stylist> allStylists = Stylist.GetAll();

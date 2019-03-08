@@ -11,14 +11,12 @@
     <table>
       <tr class="table-header">
         <th>Stylist Name</th>
-        <th>Specialty</th>
         <th>Hire Date</th>
       </tr>
       @foreach (var stylist in Model)
       {
         <tr class="table-row">
           <td><a class="link" href="/Stylists/@stylist.GetId()">@stylist.GetName()</a></td>
-          <td>@stylist.GetSpecialty()</td>
           <td>@stylist.GetHireDate().ToShortDateString()</td>
         </tr>
       }
