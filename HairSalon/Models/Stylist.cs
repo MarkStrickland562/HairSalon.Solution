@@ -197,6 +197,34 @@ namespace HairSalon.Models
       }
     }
 
+    public void Edit(string newName, DateTime newHireDate)
+     {
+       MySqlConnection conn = DB.Connection();
+       conn.Open();
+       var cmd = conn.CreateCommand() as MySqlCommand;
+       cmd.CommandText = @"UPDATE stylists SET name = (@stylistName), hire_date = (@stylistHireDate) WHERE id = (@stylistId);";
+       MySqlParameter stylistNameParameter = new MySqlParameter();
+       stylistNameParameter.ParameterName = "@stylistName";
+       stylistNameParameter.Value = newName;
+       cmd.Parameters.Add(stylistNameParameter);
+       MySqlParameter stylistHireDateParameter = new MySqlParameter();
+       stylistHireDateParameter.ParameterName = "@stylistHireDate";
+       stylistHireDateParameter.Value = newHireDate;
+       cmd.Parameters.Add(stylistHireDateParameter);
+       MySqlParameter stylistIdParameter = new MySqlParameter();
+       stylistIdParameter.ParameterName = "@stylistId";
+       stylistIdParameter.Value = this._id;
+       cmd.Parameters.Add(stylistIdParameter);
+       cmd.ExecuteNonQuery();
+       _name = newName;
+       _hireDate = newHireDate;
+       conn.Close();
+       if (conn != null)
+       {
+         conn.Dispose();
+       }
+     }
+
     public override bool Equals(System.Object otherStylist)
     {
       if (!(otherStylist is Stylist))
