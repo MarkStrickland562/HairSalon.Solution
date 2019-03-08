@@ -1,0 +1,11 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container-content label">
+  <h3>@Model["client"].GetName() identifies as @Model["client"].GetGender() and their Stylist is @Model["clientStylist"].GetName()</h3>
+  <br>
+  <p><a class="link" href='/clients/@Model["client"].GetId()/delete'>Delete This Client</a></p>
+  <p><a class="link" href='/clients'>Return to Our Clients</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>
