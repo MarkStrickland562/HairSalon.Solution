@@ -21,10 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `mark_strickland`
 --
+DROP DATABASE IF EXISTS `mark_strickland`;
+
 CREATE DATABASE IF NOT EXISTS `mark_strickland` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `mark_strickland`;
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `stylists`
+--
+
+CREATE TABLE `stylists` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `hire_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `clients`
@@ -34,55 +46,30 @@ CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `gender` enum('Male','Female','Non-Binary') DEFAULT NULL,
-  `stylist_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stylists`
---
-
-CREATE TABLE `stylists` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `specialty` varchar(255) NOT NULL,
-  `hire_date` datetime NOT NULL
+  `stylists_id` int(11) NOT NULL,
+  INDEX stylists_id_ind (stylists_id),
+  FOREIGN KEY (stylists_id) REFERENCES stylists(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Table structure for table 'specialties'
 --
 
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
+CREATE TABLE `specialties` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `specialty` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for table `stylists`
---
-ALTER TABLE `stylists`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Table structure for table 'stylists_specialties'
 --
 
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `stylists`
---
-ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE `stylists_specialties` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `stylists_id` int(11) NOT NULL,
+  `specialities_id` int(11) NOT NULL,
+  INDEX stylists_id_ind2 (stylists_id),
+  FOREIGN KEY (stylists_id) REFERENCES stylists(id) ON DELETE CASCADE,
+  INDEX specialties_id_ind (specialities_id),
+  FOREIGN KEY (specialities_id) REFERENCES specialties(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
