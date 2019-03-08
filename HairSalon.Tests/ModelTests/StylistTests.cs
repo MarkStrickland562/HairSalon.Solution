@@ -238,5 +238,30 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreEqual(testList, result);
     }
+
+    [TestMethod]
+    public void Save_SavesStylistSpecialtyToDatabase_SpecialtyList()
+    {
+      //Arrange
+      string name = "Betty Clark";
+      DateTime hireDate = new DateTime(2019, 01, 01);
+      Stylist newStylist = new Stylist(name, hireDate);
+      newStylist.Save();
+      string specialty = "Colorist";
+      Specialty newSpecialty = new Specialty(specialty);
+      newSpecialty.Save();
+
+      //Act
+      Stylist foundStylist = Stylist.Find(newStylist.GetId());
+      Specialty foundSpecialty = Specialty.Find(newSpecialty.GetId());
+      foundStylist.AddSpecialty(foundSpecialty);
+
+      List<Specialty> result = newStylist.GetSpecialties();
+      List<Specialty> testList = new List<Specialty>{foundSpecialty};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
   }
 }
