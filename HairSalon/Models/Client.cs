@@ -183,6 +183,39 @@ namespace HairSalon.Models
       }
     }
 
+    public void Edit(string newName, string newGender, int newStylistId)
+     {
+       MySqlConnection conn = DB.Connection();
+       conn.Open();
+       var cmd = conn.CreateCommand() as MySqlCommand;
+       cmd.CommandText = @"UPDATE clients SET name = (@clientName), gender = (@clientGender), stylists_id = (@clientStylistId) WHERE id = (@clientId);";
+       MySqlParameter clientNameParameter = new MySqlParameter();
+       clientNameParameter.ParameterName = "@clientName";
+       clientNameParameter.Value = newName;
+       cmd.Parameters.Add(clientNameParameter);
+       MySqlParameter clientGenderParameter = new MySqlParameter();
+       clientGenderParameter.ParameterName = "@clientGender";
+       clientGenderParameter.Value = newGender;
+       cmd.Parameters.Add(clientGenderParameter);
+       MySqlParameter clientStylistIdParameter = new MySqlParameter();
+       clientStylistIdParameter.ParameterName = "@clientStylistId";
+       clientStylistIdParameter.Value = newStylistId;
+       cmd.Parameters.Add(clientStylistIdParameter);
+       MySqlParameter clientIdParameter = new MySqlParameter();
+       clientIdParameter.ParameterName = "@clientId";
+       clientIdParameter.Value = this._id;
+       cmd.Parameters.Add(clientIdParameter);
+       cmd.ExecuteNonQuery();
+       _name = newName;
+       _gender = newGender;
+       _stylistId = newStylistId;
+       conn.Close();
+       if (conn != null)
+       {
+         conn.Dispose();
+       }
+     }
+
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
