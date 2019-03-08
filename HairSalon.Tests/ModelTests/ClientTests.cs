@@ -231,6 +231,7 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreNotEqual(testList, result);;
     }
+
     [TestMethod]
     public void Edit_UpdatesClientToDatabase()
     {
