@@ -46,7 +46,7 @@ CREATE TABLE `clients` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `gender` enum('Male','Female','Non-Binary') DEFAULT NULL,
-  `stylists_id` int(11) NOT NULL
+  `stylists_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
