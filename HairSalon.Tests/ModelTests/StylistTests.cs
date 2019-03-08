@@ -215,6 +215,5 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreNotEqual(newList, resultList);
     }
-
   }
 }

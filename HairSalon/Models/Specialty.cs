@@ -104,13 +104,45 @@ namespace HairSalon.Models
         SpecialtyId = rdr.GetInt32(0);
         Specialty = rdr.GetString(1);
       }
-      Specialty newSpecialty = new Specialty(Specialty);
+      Specialty newSpecialty = new Specialty(Specialty, SpecialtyId);
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
       return newSpecialty;
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists_specialties WHERE id = (@searchid); DELETE FROM specialties WHERE id = (@searchid);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = this._id;
+      cmd.Parameters.Add(searchId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public static void DeleteAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists_specialties; DELETE FROM specialties;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public override bool Equals(System.Object otherSpecialty)

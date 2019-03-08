@@ -111,5 +111,39 @@ namespace HairSalon.Tests
       //Assert
       Assert.AreEqual(newSpecialty, foundSpecialty);
     }
+
+    [TestMethod]
+    public void Delete_DeletesSpecialtyFromDatabase()
+    {
+      //Arrange
+      string specialty = "Colorist";
+      Specialty newSpecialty = new Specialty(specialty);
+      newSpecialty.Save();
+      newSpecialty.Delete();
+
+      //Act
+      List<Specialty> newList = new List<Specialty> { newSpecialty };
+      List<Specialty> resultList = Specialty.GetAll();
+
+      //Assert
+      CollectionAssert.AreNotEqual(newList, resultList);
+    }
+
+    [TestMethod]
+    public void DeleteAll_DeletesAllStylistsFromDatabase()
+    {
+      //Arrange
+      string specialty = "Colorist";
+      Specialty newSpecialty = new Specialty(specialty);
+      newSpecialty.Save();
+      Specialty.DeleteAll();
+
+      //Act
+      List<Specialty> newList = new List<Specialty> { newSpecialty };
+      List<Specialty> resultList = Specialty.GetAll();
+
+      //Assert
+      CollectionAssert.AreNotEqual(newList, resultList);
+    }
   }
 }
