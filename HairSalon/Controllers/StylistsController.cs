@@ -61,5 +61,13 @@ namespace HairSalon.Controllers
        stylist.AddSpecialty(specialty);
        return RedirectToAction("Show", new {id = id});
      }
+
+     [HttpGet("/stylists/{id}/delete")]
+     public ActionResult Delete(int id)
+     {
+       Stylist stylist = Stylist.Find(id);
+       stylist.Delete();
+       return RedirectToAction("Index");
+     }
   }
 }

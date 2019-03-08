@@ -16,12 +16,12 @@
       @foreach (var stylist in Model)
       {
         <tr class="table-row">
-          <td><a class="link" href="/Stylists/@stylist.GetId()">@stylist.GetName()</a></td>
+          <td><a class="link" href="/stylists/@stylist.GetId()">@stylist.GetName()</a></td>
           <td>@stylist.GetHireDate().ToShortDateString()</td>
         </tr>
       }
     </table>
   }
-  <h4><a class="link" href="/Stylists/new">Add a New Stylist</a></h4>
+  <h4><a class="link" href="/stylists/new">Add a New Stylist</a></h4>
   <h4><a class="link" href="/">Return to the Salon Foyer</a></h4>
 </div>
