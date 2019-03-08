@@ -67,5 +67,13 @@ namespace HairSalon.Controllers
        specialty.Delete();
        return RedirectToAction("Index");
      }
-  }
+
+     [HttpGet("/specialties/delete")]
+     public ActionResult Delete()
+     {
+       Specialty.DeleteAll();
+       List<Specialty> allSpecialties = Specialty.GetAll();
+       return RedirectToAction("Index", allSpecialties);
+     }
+   }
 }
