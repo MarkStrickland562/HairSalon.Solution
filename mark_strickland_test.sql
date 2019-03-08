@@ -65,5 +65,5 @@ CREATE TABLE `specialties` (
 CREATE TABLE `stylists_specialties` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `stylists_id` int(11) NOT NULL,
-  `specialities_id` int(11) NOT NULL
+  `specialties_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
