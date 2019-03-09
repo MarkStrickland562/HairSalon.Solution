@@ -232,6 +232,5 @@ namespace HairSalon.Models
         return (idEquality && nameEquality && genderEquality && stylistIdEquality);
       }
     }
-
   }
 }
