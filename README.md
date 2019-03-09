@@ -67,25 +67,34 @@ Create the databases and tables by connecting to MySQL and executing the SQL sta
     > USE mark_strickland;
     > CREATE TABLE stylists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                              name VARCHAR(255) NOT NULL,
-                             specialty VARCHAR(255) NOT NULL,
                              hire_date DATETIME NOT NULL) ENGINE=InnoDB;
 
     > CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255) NOT NULL,
                             gender enum ("Male", "Female", "Non-Binary"),
                             stylist_id INT NOT NULL) ENGINE=InnoDB;
+    > CREATE TABLE specialties (id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                specialty varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    > CREATE TABLE stylists_specialties (id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                         stylists_id int(11) NOT NULL,
+                                         specialties_id int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
     > CREATE DATABASE mark_strickland_test;
     > USE mark_strickland_test;
     > CREATE TABLE stylists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                              name VARCHAR(255) NOT NULL,
-                             specialty VARCHAR(255) NOT NULL,
                              hire_date DATETIME NOT NULL) ENGINE=InnoDB;
 
     > CREATE TABLE clients (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255) NOT NULL,
                             gender enum ("Male", "Female", "non-binary"),
                             stylist_id INT NOT NULL) ENGINE=InnoDB;
+    > CREATE TABLE specialties (id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                specialty varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    > CREATE TABLE stylists_specialties (id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                         stylists_id int(11) NOT NULL,
+                                         specialties_id int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 Clone this repository as follows: $ git clone https://github.com/MarkStrickland562/HairSalon.Solution
 
