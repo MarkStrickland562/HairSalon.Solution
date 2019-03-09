@@ -64,5 +64,21 @@ namespace HairSalon.Controllers
       List<Client> allClients = Client.GetAll();
       return RedirectToAction("Index", allClients);
     }
+
+    [HttpGet("/clients/{id}/edit")]
+    public ActionResult Edit(int id)
+    {
+      Client newClient = Client.Find(id);
+      return View(newClient);
+    }
+
+    [HttpPost("/clients/{id}/edit")]
+    public ActionResult EditPost(int id, string name, string clientGender, int stylistId)
+    {
+      Client newClient = Client.Find(id);
+      newClient.Edit(name, clientGender, stylistId);
+      List<Client> allClients = Client.GetAll();
+      return RedirectToAction("Index", allClients);
+    }
   }
 }

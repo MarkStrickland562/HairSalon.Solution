@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container-content label">
+  <h1>Update Client</h1>
+  <hr>
+  <form action="/clients/@Model.GetId()/edit" method="post">
+    <label for="name">Client Name:</label>
+    <input type="text" id="name" name="name" placeholder="@Model.GetName()">
+    <label for="clientGender">Client Gender:</label>
+    <select id="clientGender" name="clientGender" type="text" placeholder="@Model.GetGender()">
+      <option value='Male'>Male</option>
+      <option value='Female'>Female</option>
+      <option value='Non-Binary'>Non-Binary</option>
+    </select>
+    <label for="stylistId"></label>
+    <input type="hidden" id="stylistId" name="stylistId" placeholder="@Model.GetStylistId()">
+    <button type="submit">Update</button>
+  </form>
+  <br>
+  <p><a class="link" href='/clients'>Return to Our Clients</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>

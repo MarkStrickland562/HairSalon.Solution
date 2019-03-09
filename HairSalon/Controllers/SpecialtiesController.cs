@@ -75,5 +75,20 @@ namespace HairSalon.Controllers
        List<Specialty> allSpecialties = Specialty.GetAll();
        return RedirectToAction("Index", allSpecialties);
      }
+
+     [HttpGet("/specialties/{id}/edit")]
+     public ActionResult Edit(int id)
+     {
+       Specialty newSpecialty = Specialty.Find(id);
+       return View(newSpecialty);
+     }
+
+     [HttpPost("/specialties/{id}/edit")]
+     public ActionResult EditPost(int id, string specialty)
+     {
+       Specialty newSpecialty = Specialty.Find(id);
+       newSpecialty.Edit(specialty);
+       return RedirectToAction("Index");
+     }
    }
 }

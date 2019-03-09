@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container-content label">
+  <h1>Update Specialty</h1>
+  <hr>
+  <form action="/specialties/@Model.GetId()/edit" method="post">
+    <label for="specialty">Specialty:</label>
+    <input type="text" id="specialty" name="specialty" placeholder="@Model.GetSpecialty()">
+    <button type="submit">Update</button>
+  </form>
+  <br>
+  <p><a class="link" href='/stylists'>Return to Our Specialties</a></p>
+  <p><a class="link" href='/'>Return to the Salon Foyer</a></p>
+</div>
