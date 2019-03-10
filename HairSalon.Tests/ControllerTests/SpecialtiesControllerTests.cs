@@ -8,8 +8,18 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class SpecialtiesControllerTest
+  public class SpecialtiesControllerTest : IDisposable
   {
+    public SpecialtiesControllerTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mark_strickland_test;";
+    }
+
+    public void Dispose()
+    {
+      Specialty.ClearAll();
+    }
+
     [TestMethod]
     public void Index_ReturnsCorrectView_True()
     {
@@ -119,7 +129,7 @@ namespace HairSalon.Tests
     {
       //Arrange
       SpecialtiesController controller = new SpecialtiesController();
-  
+
       //Act
       IActionResult view = controller.EditPost(1, "Colorist");
 

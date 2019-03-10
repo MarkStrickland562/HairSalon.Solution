@@ -8,8 +8,18 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class ClientsControllerTest
+  public class ClientsControllerTest : IDisposable
   {
+    public ClientsControllerTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mark_strickland_test;";
+    }
+
+    public void Dispose()
+    {
+      Client.ClearAll();
+    }
+
     [TestMethod]
     public void Index_ReturnsCorrectView_True()
     {
