@@ -33,8 +33,7 @@ namespace HairSalon.Controllers
       }
       else
       {
-        List<Client> allClients = Client.GetAll();
-        return View("New", allClients);
+        return View("New");
       }
     }
 

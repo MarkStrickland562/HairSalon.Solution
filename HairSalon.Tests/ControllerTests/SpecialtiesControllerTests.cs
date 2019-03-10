@@ -8,13 +8,13 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class StylistsControllerTest
+  public class SpecialtiesControllerTest
   {
     [TestMethod]
     public void Index_ReturnsCorrectView_True()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       ActionResult newView = controller.Index();
@@ -27,7 +27,7 @@ namespace HairSalon.Tests
     public void New_ReturnsCorrectView_True()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       ActionResult newView = controller.New();
@@ -37,24 +37,10 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Create_ReturnsCorrectActionType_ViewResult()
-    {
-      //Arrange
-      StylistsController controller = new StylistsController();
-
-      //Act
-      DateTime hireDate = new DateTime(2019, 1, 1);
-      IActionResult view = controller.Create("Jane Doe", hireDate);
-
-      //Assert
-      Assert.IsInstanceOfType(view, typeof(ViewResult));
-    }
-
-    [TestMethod]
     public void Show_ReturnsCorrectView_True()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       ActionResult newView = controller.Show(1);
@@ -64,13 +50,26 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void NewSpecialty_ReturnsCorrectActionType_RedirectToActionResult()
+    public void Create_ReturnsCorrectActionType_ViewResult()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
-      IActionResult view = controller.AddSpecialty(1, 1);
+      IActionResult view = controller.Create("Colorist");
+
+      //Assert
+      Assert.IsInstanceOfType(view, typeof(ViewResult));
+    }
+
+    [TestMethod]
+    public void NewStylist_ReturnsCorrectActionType_RedirectToActionResult()
+    {
+      //Arrange
+      SpecialtiesController controller = new SpecialtiesController();
+
+      //Act
+      IActionResult view = controller.AddStylist(1, 1);
 
       //Assert
       Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
@@ -80,7 +79,7 @@ namespace HairSalon.Tests
     public void Delete_ReturnsCorrectActionType_RedirectToActionResult()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       IActionResult view = controller.Delete(1);
@@ -93,7 +92,7 @@ namespace HairSalon.Tests
     public void DeleteAll_ReturnsCorrectActionType_RedirectToActionResult()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       IActionResult view = controller.Delete();
@@ -106,7 +105,7 @@ namespace HairSalon.Tests
     public void Edit_ReturnsCorrectView_True()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
+      SpecialtiesController controller = new SpecialtiesController();
 
       //Act
       ActionResult newView = controller.Edit(1);
@@ -119,11 +118,10 @@ namespace HairSalon.Tests
     public void Edit_ReturnsCorrectActionType_RedirectToActionResult()
     {
       //Arrange
-      StylistsController controller = new StylistsController();
-
+      SpecialtiesController controller = new SpecialtiesController();
+  
       //Act
-      DateTime hireDate = new DateTime(2019, 1, 1);
-      IActionResult view = controller.EditPost(1, "Jane Doe", hireDate);
+      IActionResult view = controller.EditPost(1, "Colorist");
 
       //Assert
       Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
